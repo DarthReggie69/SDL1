@@ -9,19 +9,19 @@
 bool init();
 
 
-bool loadMedia();
+bool loadMedia();     
 
 
 void close();
 
 
-SDL_Window* gWindow = NULL;
+SDL_Window* gameWindow = NULL;
 
 
 SDL_Surface* gScreenSurface = NULL;
 
 
-SDL_Surface* gHelloWorld = NULL;
+SDL_Surface* gHelloThere = NULL;
 
 bool init()
 {
@@ -37,8 +37,8 @@ bool init()
     else
     {
 
-        gWindow = SDL_CreateWindow("Mood Killers ", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_SHOWN);
-        if (gWindow == NULL)
+        gameWindow = SDL_CreateWindow("Mood Killers ", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_SHOWN);
+        if (gameWindow == NULL)
         {
             printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
             success = false;
@@ -46,7 +46,7 @@ bool init()
         else
         {
 
-            gScreenSurface = SDL_GetWindowSurface(gWindow);
+            gScreenSurface = SDL_GetWindowSurface(gameWindow);
         }
     }
 
@@ -59,8 +59,8 @@ bool loadMedia()
     bool success = true;
 
 
-    gHelloWorld = SDL_LoadBMP("Pictures/background.bmp");
-    if (gHelloWorld == NULL)
+    gHelloThere = SDL_LoadBMP("Pictures/background.bmp");
+    if (gHelloThere == NULL)
     {
         printf("Unable to load image %s! SDL Error: %s\n", "Pictures/background.bmp", SDL_GetError());
         success = false;
@@ -72,12 +72,12 @@ bool loadMedia()
 void close()
 {
 
-    SDL_FreeSurface(gHelloWorld);
-    gHelloWorld = NULL;
+    SDL_FreeSurface(gHelloThere);
+    gHelloThere = NULL;
 
 
-    SDL_DestroyWindow(gWindow);
-    gWindow = NULL;
+    SDL_DestroyWindow(gameWindow);
+    gameWindow = NULL;
 
 
     SDL_Quit();
@@ -101,9 +101,9 @@ int main(int argc, char* args[])
         else
         {
 
-            SDL_BlitSurface(gHelloWorld, NULL, gScreenSurface, NULL);
+            SDL_BlitSurface(gHelloThere, NULL, gScreenSurface, NULL);
 
-            SDL_UpdateWindowSurface(gWindow);
+            SDL_UpdateWindowSurface(gameWindow);
 
 
             system("pause");
